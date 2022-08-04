@@ -1,7 +1,7 @@
 package pl.matkoc.FamilyApp.model;
 
 import java.util.Objects;
-
+// implementuje interfejs Comparable<T> dla napisania metody compareTo
 public class Family implements Comparable<Family>{
 
     private Integer id;
@@ -85,6 +85,7 @@ public class Family implements Comparable<Family>{
                 '}';
     }
 
+    // nadpisanie metody compareTo() dla uporządkowania obiektów w kolekcjach wg nazwy, ilosći dorosłych, dzieci i niemowląt
     @Override
     public int compareTo(Family otherFamily) {
 
