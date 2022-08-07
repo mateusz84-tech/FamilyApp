@@ -14,6 +14,21 @@ public class FamilyTest {
     public void createFamily(){
         family = new Family();
     }
+    @Test
+    public void createObjectFamilyWitchDefaultsValues(){
+        assertNull(family.getFamilyName());
+        assertNull(family.getNrOfAdults());
+        assertNull(family.getNrOfChildren());
+        assertNull(family.getNrOfInfants());
+    }
+    @Test
+    public void createObjectWitchInjectValues(){
+        family = new Family("Kowalscy",2,1,1);
+        assertEquals("Kowalscy",family.getFamilyName());
+        assertEquals(Integer.valueOf(2),family.getNrOfAdults());
+        assertEquals(Integer.valueOf(1),family.getNrOfChildren());
+        assertEquals(Integer.valueOf(1),family.getNrOfInfants());
+    }
 
     @Test
     public void setFamilyName(){
@@ -49,6 +64,23 @@ public class FamilyTest {
     public void setNrOfChildrenLessThanZero(){
         family.setNrOfChildren(-1);
         assertEquals(Integer.valueOf(-1),family.getNrOfChildren());
+    }
+
+    @Test
+    public void setNrOfInfantsMoreThanZero(){
+        family.setNrOfInfants(1);
+        assertEquals(Integer.valueOf(1),family.getNrOfInfants());
+    }
+
+    @Test
+    public void setNrOfInfantsEqualsZero(){
+        family.setNrOfInfants(0);
+        assertEquals(Integer.valueOf(0),family.getNrOfInfants());
+    }
+    @Test(expected = IllegalArgumentException.class)
+    public void setNrOfInfantsLessThanZero(){
+        family.setNrOfInfants(-1);
+        assertEquals(Integer.valueOf(-1),family.getNrOfInfants());
     }
 
 
