@@ -62,6 +62,9 @@ public class Family implements Comparable<Family>{
     }
 
     public void setNrOfAdults(Integer nrOfAdults) {
+        if(nrOfAdults <=0){
+            throw new IllegalArgumentException("Błędne dane");
+        }
         this.nrOfAdults = nrOfAdults;
     }
 
@@ -70,6 +73,9 @@ public class Family implements Comparable<Family>{
     }
 
     public void setNrOfChildren(Integer nrOfChildren) {
+        if(nrOfChildren < 0){
+            throw new IllegalArgumentException("Błędne dane");
+        }
         this.nrOfChildren = nrOfChildren;
     }
 
