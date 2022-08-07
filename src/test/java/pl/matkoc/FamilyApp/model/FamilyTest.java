@@ -15,19 +15,47 @@ public class FamilyTest {
         family = new Family();
     }
     @Test
-    public void createObjectFamilyWitchDefaultsValues(){
+    public void createObjectFamilyWithDefaultsValues(){
         assertNull(family.getFamilyName());
         assertNull(family.getNrOfAdults());
         assertNull(family.getNrOfChildren());
         assertNull(family.getNrOfInfants());
     }
     @Test
-    public void createObjectWitchInjectValues(){
+    public void createObjectWithInjectValues(){
         family = new Family("Kowalscy",2,1,1);
         assertEquals("Kowalscy",family.getFamilyName());
         assertEquals(Integer.valueOf(2),family.getNrOfAdults());
         assertEquals(Integer.valueOf(1),family.getNrOfChildren());
         assertEquals(Integer.valueOf(1),family.getNrOfInfants());
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void createObjectWithNullValueOfName(){
+        family = new Family(null, 1,1,1);
+        assertNull(family.getFamilyName());
+        assertEquals(Integer.valueOf(1),family.getNrOfAdults());
+        assertEquals(Integer.valueOf(1),family.getNrOfChildren());
+        assertEquals(Integer.valueOf(1),family.getNrOfInfants());
+    }
+
+
+    @Test(expected = IllegalArgumentException.class)
+    public void createObjectWithNrOfAdultsLessThanZero(){
+        family = new Family("Kowalscy",-1,1,1);
+        assertEquals("Kowalscy",family.getFamilyName());
+        assertEquals(Integer.valueOf(-1),family.getNrOfAdults());
+    }
+    @Test(expected = IllegalArgumentException.class)
+    public void createObjectWithNrOfChildrenLessThanZero(){
+        family = new Family("Kowalscy",1,-1,1);
+        assertEquals(Integer.valueOf(-1),family.getNrOfChildren());
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void createObjectWithNrOfInfantsLessThanZero(){
+        family = new Family("Kowalscy", 1,1,-1);
+        assertEquals(Integer.valueOf(-1),family.getNrOfInfants());
     }
 
     @Test
