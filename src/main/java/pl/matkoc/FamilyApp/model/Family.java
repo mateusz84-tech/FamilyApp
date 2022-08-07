@@ -18,10 +18,18 @@ public class Family implements Comparable<Family>{
     private Integer nrOfInfants;
 
     public Family(String familyName, Integer nrOfAdults, Integer nrOfChildren, Integer nrOfInfants) {
-        this.familyName = familyName;
-        this.nrOfAdults = nrOfAdults;
-        this.nrOfChildren = nrOfChildren;
-        this.nrOfInfants = nrOfInfants;
+
+        if(familyName == null) throw new NullPointerException("Nazwa nie może być null.");
+        else this.familyName = familyName;
+
+        if(nrOfAdults < 0) throw new IllegalArgumentException("Wartość musi być > 0");
+        else this.nrOfAdults = nrOfAdults;
+
+        if(nrOfChildren < 0) throw new IllegalArgumentException("Wartość musi być > 0.");
+        else this.nrOfChildren = nrOfChildren;
+
+        if(nrOfInfants < 0) throw new IllegalArgumentException("Wartość musi być > 0.");
+        else this.nrOfInfants = nrOfInfants;
     }
 
     public Family() {
