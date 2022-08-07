@@ -23,12 +23,15 @@ public class Family implements Comparable<Family>{
         else this.familyName = familyName;
 
         if(nrOfAdults < 0) throw new IllegalArgumentException("Wartość musi być > 0");
+        else if(nrOfAdults == null) throw new NullPointerException("Wartosć nie może być null");
         else this.nrOfAdults = nrOfAdults;
 
         if(nrOfChildren < 0) throw new IllegalArgumentException("Wartość musi być > 0.");
+        else if(nrOfChildren == null) throw new NullPointerException("Wartosć nie może być null");
         else this.nrOfChildren = nrOfChildren;
 
         if(nrOfInfants < 0) throw new IllegalArgumentException("Wartość musi być > 0.");
+        else if(nrOfInfants == null) throw new NullPointerException("Wartosć nie może być null");
         else this.nrOfInfants = nrOfInfants;
     }
 
