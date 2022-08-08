@@ -1,9 +1,8 @@
 package pl.matkoc.FamilyApp.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 // implementuje interfejs Comparable<T> dla napisania metody compareTo
 @Entity
@@ -16,6 +15,9 @@ public class Family implements Comparable<Family>{
     private Integer nrOfAdults;
     private Integer nrOfChildren;
     private Integer nrOfInfants;
+
+    @OneToMany
+    private List<FamilyMember> familyMembers = new ArrayList<>();
 
     public Family(String familyName, Integer nrOfAdults, Integer nrOfChildren, Integer nrOfInfants) {
 
@@ -51,9 +53,31 @@ public class Family implements Comparable<Family>{
     public int hashCode() {
         return Objects.hash(familyName, nrOfAdults, nrOfChildren, nrOfInfants);
     }
+    // nadpisanie metody compareTo() dla uporządkowania obiektów w kolekcjach wg nazwy, ilosći dorosłych, dzieci i niemowląt
+    @Override
+    public int compareTo(Family otherFamily) {
+
+        int result = this.familyName.compareToIgnoreCase(otherFamily.getFamilyName());
+        if(result == 0)
+            result = this.nrOfAdults.compareTo(otherFamily.getNrOfAdults());
+        if(result == 0)
+            result = this.nrOfChildren.compareTo(otherFamily.getNrOfChildren());
+        if(result == 0)
+            result = this.nrOfInfants.compareTo(otherFamily.getNrOfInfants());
+
+        return result;
+    }
 
     public Integer getId() {
         return id;
+    }
+
+    public List<FamilyMember> getFamilyMembers() {
+        return familyMembers;
+    }
+
+    public void setFamilyMembers(List<FamilyMember> familyMembers) {
+        this.familyMembers = familyMembers;
     }
 
     public void setId(Integer id) {
@@ -107,20 +131,5 @@ public class Family implements Comparable<Family>{
                 ", nrOfChildren=" + nrOfChildren +
                 ", nrOfInfants=" + nrOfInfants +
                 '}';
-    }
-
-    // nadpisanie metody compareTo() dla uporządkowania obiektów w kolekcjach wg nazwy, ilosći dorosłych, dzieci i niemowląt
-    @Override
-    public int compareTo(Family otherFamily) {
-
-        int result = this.familyName.compareToIgnoreCase(otherFamily.getFamilyName());
-        if(result == 0)
-            result = this.nrOfAdults.compareTo(otherFamily.getNrOfAdults());
-        if(result == 0)
-            result = this.nrOfChildren.compareTo(otherFamily.getNrOfChildren());
-        if(result == 0)
-            result = this.nrOfInfants.compareTo(otherFamily.getNrOfInfants());
-
-        return result;
     }
 }
