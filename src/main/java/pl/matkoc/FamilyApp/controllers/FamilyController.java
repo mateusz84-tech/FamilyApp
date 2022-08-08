@@ -15,11 +15,14 @@ public class FamilyController {
     }
 
     @PostMapping()
-    public int createFamily(@RequestBody Family family){
+    public int createFamily(@RequestBody Family family) {
 
-        if(family != null){
-            familyRepository.save(family);
-            return 1;
+        if (family != null) {
+            if (family.getFamilyName() != null && family.getNrOfAdults() > 0 &&
+                    family.getNrOfChildren() >= 0 && family.getNrOfInfants() >= 0) {
+                familyRepository.save(family);
+            }
+            return family.getId();
         }
         else return -1;
     }
