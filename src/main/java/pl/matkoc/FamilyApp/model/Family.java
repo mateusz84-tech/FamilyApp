@@ -16,7 +16,10 @@ public class Family implements Comparable<Family>{
     private Integer nrOfChildren;
     private Integer nrOfInfants;
 
-    @OneToMany
+    // dodanie atrubutu fetchType.EAGER dla pobierania natychmiastowego encji powiązanej
+    // domyślnie relacja @OneToMany otrzymuje wartość LAZY - leniwe pobieranie wartości- na żądanie w zapytaniu
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "family_members_id")
     private List<FamilyMember> familyMembers = new ArrayList<>();
 
     public Family(String familyName, Integer nrOfAdults, Integer nrOfChildren, Integer nrOfInfants) {
