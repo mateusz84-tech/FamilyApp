@@ -11,20 +11,26 @@ public class FamilyMember implements Comparable<FamilyMember>{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
     private String name;
-    private int yearAdults;
-    private int yearChildren;
-    private int yearInfants;
+    private String familyName;
+    private int age;
 
-    public FamilyMember(String name, int yearAdults, int yearChildren, int yearInfants) {
+    public FamilyMember(String name, String familyName, int age) {
         this.name = name;
-        this.yearAdults = yearAdults;
-        this.yearChildren = yearChildren;
-        this.yearInfants = yearInfants;
+        this.familyName = familyName;
+        this.age = age;
     }
 
     public FamilyMember() {
+    }
+
+    @Override
+    public int compareTo(FamilyMember otherFamilyMembers) {
+        int result = name.compareTo(otherFamilyMembers.getName());
+        if(result == 0) result = familyName.compareToIgnoreCase(otherFamilyMembers.getName());
+        if(result == 0) result = Integer.compare(age, otherFamilyMembers.getAge());
+        return result;
     }
 
     @Override
@@ -32,23 +38,12 @@ public class FamilyMember implements Comparable<FamilyMember>{
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         FamilyMember that = (FamilyMember) o;
-        return yearAdults == that.yearAdults &&
-                yearChildren == that.yearChildren &&
-                yearInfants == that.yearInfants && name.equals(that.name);
+        return age == that.age && name.equals(that.name) && familyName.equals(that.familyName);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, yearAdults, yearChildren, yearInfants);
-    }
-
-    @Override
-    public int compareTo(FamilyMember otherFamilyMembers) {
-        int result = name.compareTo(otherFamilyMembers.getName());
-        if(result == 0) result = Integer.compare(yearAdults, otherFamilyMembers.getYearAdults());
-        if(result == 0) result = Integer.compare(yearChildren, otherFamilyMembers.getYearChildren());
-        if(result == 0) result = Integer.compare(yearInfants, otherFamilyMembers.getYearInfants());
-        return result;
+        return Objects.hash(name, familyName, age);
     }
 
     public int getId() {
@@ -67,28 +62,20 @@ public class FamilyMember implements Comparable<FamilyMember>{
         this.name = name;
     }
 
-    public int getYearAdults() {
-        return yearAdults;
+    public String getFamilyName() {
+        return familyName;
     }
 
-    public void setYearAdults(int yearAdults) {
-        this.yearAdults = yearAdults;
+    public void setFamilyName(String familyName) {
+        this.familyName = familyName;
     }
 
-    public int getYearChildren() {
-        return yearChildren;
+    public int getAge() {
+        return age;
     }
 
-    public void setYearChildren(int yearChildren) {
-        this.yearChildren = yearChildren;
-    }
-
-    public int getYearInfants() {
-        return yearInfants;
-    }
-
-    public void setYearInfants(int yearInfants) {
-        this.yearInfants = yearInfants;
+    public void setAge(int age) {
+        this.age = age;
     }
 
     @Override
@@ -96,9 +83,8 @@ public class FamilyMember implements Comparable<FamilyMember>{
         return "FamilyMember{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", yearAdults=" + yearAdults +
-                ", yearChildren=" + yearChildren +
-                ", yearInfants=" + yearInfants +
+                ", familyName='" + familyName + '\'' +
+                ", age=" + age +
                 '}';
     }
 }
