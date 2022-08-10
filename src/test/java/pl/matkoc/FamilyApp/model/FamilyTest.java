@@ -28,7 +28,6 @@ public class FamilyTest {
     @Test(expected = NullPointerException.class)
     public void createObjectWithNullValueOfName(){
         family = new Family(null, 1,1,1);
-        assertNull(family.getFamilyName());
         assertEquals(Integer.valueOf(1),family.getNrOfAdults());
         assertEquals(Integer.valueOf(1),family.getNrOfChildren());
         assertEquals(Integer.valueOf(1),family.getNrOfInfants());
