@@ -7,4 +7,6 @@ public interface FamilyRepository extends JpaRepository<Family, Integer> {
 
     @Override
     <S extends Family> S save(S entity);
+
+    Family getFirstById(Integer id);
 }
