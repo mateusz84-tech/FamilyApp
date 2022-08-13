@@ -3,6 +3,7 @@ package pl.matkoc.FamilyApp.controllers;
 import org.springframework.web.bind.annotation.*;
 import pl.matkoc.FamilyApp.model.Family;
 import pl.matkoc.FamilyApp.repository.FamilyRepository;
+import pl.matkoc.FamilyApp.validate.ValidateData;
 
 @RestController
 @RequestMapping("/family")
@@ -20,8 +21,11 @@ public class FamilyController {
         if(family != null){
             if(family.getFamilyName() != null && family.getNrOfInfants() >=0 &&
                 family.getNrOfChildren() >= 0 && family.getNrOfInfants() >= 0){
-                familyRepository.save(family);
-                return family.getId();
+                if(ValidateData.validateFamilyMemberAge(family) == true) {
+                    familyRepository.save(family);
+                    return family.getId();
+                }
+                else return -1;
             }
         }
         return -1;
