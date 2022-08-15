@@ -5,6 +5,8 @@ import pl.matkoc.FamilyApp.model.Family;
 import pl.matkoc.FamilyApp.repository.FamilyRepository;
 import pl.matkoc.FamilyApp.validate.ValidateData;
 
+import java.security.SecureRandom;
+
 @RestController
 @RequestMapping("/family")
 public class FamilyController {
